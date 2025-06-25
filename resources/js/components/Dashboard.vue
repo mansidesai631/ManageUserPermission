@@ -11,7 +11,6 @@
       <Sidebar :role="user.user_type" @navigate="setView" @logout="logout" />
     </aside>
 
-    <!-- Backdrop for mobile -->
     <div
       v-if="sidebarOpen"
       class="fixed inset-0 bg-black bg-opacity-30 z-30 lg:hidden"
@@ -20,7 +19,6 @@
 
     <!-- Main content -->
     <div class="flex flex-col flex-1 overflow-hidden">
-      <!-- Topbar -->
       <header class="flex items-center justify-between bg-white px-6 py-4 shadow-md">
         <div class="flex items-center gap-3">
           <button @click="toggleSidebar" class="lg:hidden text-indigo-600 focus:outline-none">
@@ -36,7 +34,6 @@
         </div>
       </header>
 
-      <!-- Page content -->
       <main class="flex-1 p-6 overflow-y-auto bg-white rounded-tl-2xl shadow-inner">
         <component :is="currentView" :user="user" />
       </main>

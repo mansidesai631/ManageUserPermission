@@ -52,7 +52,7 @@ export default {
     return {
       roles: [],
       allPermissions: [],
-      rolePermissions: {},  // { roleId: [permission names] }
+      rolePermissions: {},
       saving: {},
       loading: true,
     };
@@ -65,8 +65,8 @@ export default {
       try {
         const { data } = await axios.get('/api/roles-permissions');
         this.roles = data.roles;
-        this.allPermissions = data.permissions; // full list from DB [{ id, name }]
-        this.rolePermissions = data.rolePermissions; // { role_id: ['PermissionManagement'] }
+        this.allPermissions = data.permissions; 
+        this.rolePermissions = data.rolePermissions;
       } catch (e) {
         console.error('Error fetching roles/permissions', e);
       } finally {

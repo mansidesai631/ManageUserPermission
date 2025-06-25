@@ -59,14 +59,4 @@ class User extends Authenticatable
     {
         return $this->role?->permissions() ?? collect();
     }
-
-    public function syncPermissionsByRole()
-    {
-        $permissions = match ($this->user_type) {
-            'Admin'     => ['UserManagement.create', 'UserManagement.read', 'UserManagement.edit'],
-            'Associate' => ['UserManagement.create', 'UserManagement.read'],
-            default     => [],
-        };
-        $this->permissions()->sync(Permission::whereIn('name', $permissions)->pluck('id'));
-    }
 }
