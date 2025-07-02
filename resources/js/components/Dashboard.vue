@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import DashboardHome from './DashboardHome.vue';
 import Sidebar from './Sidebar.vue';
 import UserManagement from './UserManagement.vue';
 import PermissionManagement from './PermissionManagement.vue';
@@ -50,10 +51,10 @@ import axios from 'axios';
 
 export default {
   props: ['user'],
-  components: { Sidebar, UserManagement, PermissionManagement, PermissionCrud},
+  components: { DashboardHome, Sidebar, UserManagement, PermissionManagement, PermissionCrud},
   data() {
     return {
-      currentView: 'UserManagement',
+      currentView: 'DashboardHome',
       sidebarOpen: false,
     };
   },
