@@ -51,5 +51,39 @@ class PermissionController extends Controller {
 
         return response()->json(['message' => 'Permissions updated successfully.']);
     }
+
+    public function index()
+    {
+        return response()->json(Permission::latest()->get());
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'name'  => 'required|string|unique:permissions',
+        ]);
+
+        $permission = Permission::create($validated);
+
+        return response()->json(['message' => 'Permission created.', 'data' => $permission]);
+    }
+
+    public function update(Request $request, Permission $permission)
+    {
+        $validated = $request->validate([
+            'name'  => 'required|string|unique:permissions,name,' . $permission->id,
+        ]);
+
+        $permission->update($validated);
+
+        return response()->json(['message' => 'Permission updated.', 'data' => $permission]);
+    }
+
+    public function destroy(Permission $permission)
+    {
+        $permission->delete();
+
+        return response()->json(['message' => 'Permission deleted.']);
+    }
 }
 

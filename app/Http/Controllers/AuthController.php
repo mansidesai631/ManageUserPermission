@@ -41,10 +41,14 @@ class AuthController extends Controller
         }
 
         $user->load('role.permissions');
+        $permissions = $user->role?->permissions->pluck('name') ?? [];
+        
+        // Attach permissions directly to the user object
+        $user->permissions = $permissions;
 
         return response()->json([
             'user' => $user,
-            'permissions' => $user->role?->permissions->pluck('name') ?? [],
+            'permissions' => $permissions,
         ]);
     }
 }

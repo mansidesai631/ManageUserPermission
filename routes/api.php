@@ -13,6 +13,7 @@ Route::middleware([EnsureFrontendRequestsAreStateful::class, 'auth:sanctum'])->g
   Route::get('user', [AuthController::class,'currentUser']);
 
   Route::apiResource('users', UserController::class);
+  Route::apiResource('permissions', PermissionController::class);
 
   Route::get('/roles-permissions', [PermissionController::class, 'rolesWithPermissions']);
   Route::post('/roles/{role}/permissions', [PermissionController::class, 'updateRolePermissions']);

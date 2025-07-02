@@ -52,7 +52,7 @@ class User extends Authenticatable
 
     public function role()
     {
-        return $this->belongsTo(Role::class, 'user_type', 'name');
+        return $this->belongsTo(Role::class, 'user_type');
     }
 
     public function permissions()

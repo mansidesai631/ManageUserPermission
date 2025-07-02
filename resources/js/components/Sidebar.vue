@@ -15,12 +15,21 @@
       </button>
 
       <button
-        v-if="canAccess('PermissionManagement')"
-        @click="$emit('navigate', 'PermissionManagement')"
+        v-if="canAccess('PermissionCrud')"
+        @click="$emit('navigate', 'PermissionCrud')"
         class="flex items-center w-full px-4 py-2 rounded-lg hover:bg-indigo-600 bg-opacity-10 transition-colors text-sm font-medium"
       >
         <span class="text-indigo-300">🔐</span>
         <span class="ml-3">Permission Management</span>
+      </button>
+
+      <button
+        v-if="canAccess('PermissionManagement')"
+        @click="$emit('navigate', 'PermissionManagement')"
+        class="flex items-center w-full px-4 py-2 rounded-lg hover:bg-indigo-600 bg-opacity-10 transition-colors text-sm font-medium"
+      >
+        <span class="text-indigo-300">🧩</span>
+        <span class="ml-3">Permissions Assign</span>
       </button>
     </nav>
 
@@ -37,15 +46,23 @@
 
 <script>
 export default {
-  props: ['role'],
+  props: {
+    role: {
+      type: Number,
+      required: true
+    },
+    permissions: {
+      type: Array,
+      default: () => []
+    }
+  },
   methods: {
-    canAccess(module) {
-      const rolePermissions = {
-        1: ['UserManagement', 'PermissionManagement'], // Owner
-        2: ['UserManagement'], // Admin
-        3: ['UserManagement'], // Associate
-      };
-      return rolePermissions[this.role]?.includes(module);
+    canAccess(permission) {
+      // If Owner, allow all
+      if (this.role == 1) return true;
+
+      // Otherwise check assigned permissions
+      return this.permissions.includes(permission);
     }
   }
 }

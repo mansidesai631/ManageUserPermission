@@ -8,7 +8,7 @@
         'lg:translate-x-0 lg:relative'
       ]"
     >
-      <Sidebar :role="user.user_type" @navigate="setView" @logout="logout" />
+      <Sidebar :permissions="user.permissions" :role="user.user_type" @navigate="setView" @logout="logout" />
     </aside>
 
     <div
@@ -45,11 +45,12 @@
 import Sidebar from './Sidebar.vue';
 import UserManagement from './UserManagement.vue';
 import PermissionManagement from './PermissionManagement.vue';
+import PermissionCrud from './PermissionCrud.vue';
 import axios from 'axios';
 
 export default {
   props: ['user'],
-  components: { Sidebar, UserManagement, PermissionManagement },
+  components: { Sidebar, UserManagement, PermissionManagement, PermissionCrud},
   data() {
     return {
       currentView: 'UserManagement',
