@@ -66,7 +66,7 @@ export default {
       this.sidebarOpen = false;
     },
     logout() {
-      axios.post('/api/logout').then(() => location.reload());
+      axios.post('/logout').then(() => location.reload());
     }
   }
 }

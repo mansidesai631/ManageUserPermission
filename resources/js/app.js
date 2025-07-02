@@ -27,7 +27,7 @@ createApp({
     },
     async fetchUser() {
       try {
-        const { data } = await axios.get('http://localhost:8000/api/user');
+        const { data } = await axios.get('http://localhost:8000/user');
         this.user = data.user;
         this.userPermissions = data.permissions;
       } catch (error) {

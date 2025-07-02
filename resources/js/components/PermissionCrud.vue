@@ -70,7 +70,7 @@ export default {
   },
   methods: {
     async fetchPermissions() {
-      const { data } = await axios.get('/api/permissions');
+      const { data } = await axios.get('/permissions');
       this.permissions = data;
       this.filteredPermissions = data;
     },
@@ -87,9 +87,9 @@ export default {
       this.loading = true;
       try {
         if (this.form.id) {
-          await axios.put(`/api/permissions/${this.form.id}`, this.form);
+          await axios.put(`/permissions/${this.form.id}`, this.form);
         } else {
-          await axios.post('/api/permissions', this.form);
+          await axios.post('/permissions', this.form);
         }
         await this.fetchPermissions();
         this.showModal = false;
@@ -100,7 +100,7 @@ export default {
     },
     async remove(p) {
       if (confirm(`Delete permission "${p.name}"?`)) {
-        await axios.delete(`/api/permissions/${p.id}`);
+        await axios.delete(`/permissions/${p.id}`);
         await this.fetchPermissions();
       }
     },

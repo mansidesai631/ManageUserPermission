@@ -121,7 +121,7 @@ export default {
       return this.userPermissions?.includes(permission);
     },
     async fetchUsers() {
-      const { data } = await axios.get(`/api/users`, {
+      const { data } = await axios.get(`/users`, {
         params: { page: this.page, search: this.search },
       });
       this.users = data;
@@ -134,9 +134,9 @@ export default {
       this.loading = true;
       try {
         if (this.form.id) {
-          await axios.put(`/api/users/${this.form.id}`, this.form);
+          await axios.put(`/users/${this.form.id}`, this.form);
         } else {
-          await axios.post(`/api/users`, this.form);
+          await axios.post(`/users`, this.form);
         }
         this.fetchUsers();
         this.showModal = false;
@@ -147,7 +147,7 @@ export default {
     },
     async remove(u) {
       if (confirm('Delete user?')) {
-        await axios.delete(`/api/users/${u.id}`);
+        await axios.delete(`/users/${u.id}`);
         this.fetchUsers();
       }
     },

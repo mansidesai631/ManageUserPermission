@@ -63,7 +63,7 @@ export default {
   methods: {
     async fetchRolesAndPermissions() {
       try {
-        const { data } = await axios.get('/api/roles-permissions');
+        const { data } = await axios.get('/roles-permissions');
         this.roles = data.roles;
         this.allPermissions = data.permissions; 
         this.rolePermissions = data.rolePermissions;
@@ -76,7 +76,7 @@ export default {
     async savePermissions(roleId) {
       this.saving[roleId] = true;
       try {
-        await axios.post(`/api/roles/${roleId}/permissions`, {
+        await axios.post(`/roles/${roleId}/permissions`, {
           permissions: this.rolePermissions[roleId],
         });
       } catch (e) {

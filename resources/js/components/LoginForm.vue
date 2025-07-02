@@ -56,7 +56,7 @@ export default {
       this.loading = true;
       try {
         await axios.get('http://localhost:8000/sanctum/csrf-cookie');
-        const { data } = await axios.post('http://localhost:8000/api/login', {
+        const { data } = await axios.post('http://localhost:8000/login', {
           email: this.email,
           password: this.password,
         });
