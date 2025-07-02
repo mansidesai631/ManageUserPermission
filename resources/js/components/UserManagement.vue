@@ -122,7 +122,7 @@ export default {
     },
     async fetchUsers() {
       const { data } = await axios.get(`/api/users`, {
-        params: { page: this.page, per_page: 10, search: this.search },
+        params: { page: this.page, search: this.search },
       });
       this.users = data;
     },

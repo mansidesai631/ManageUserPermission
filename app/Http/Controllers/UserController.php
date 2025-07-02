@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $perPage = (int) ($request->input('per_page', 10));
+        $perPage = (int) ($request->input('per_page', 3));
         $search  = $request->input('search');
 
         $authUser = auth()->user();
