@@ -9,7 +9,7 @@
           placeholder="Search permissions..."
           class="input flex-1"
         />
-        <button class="btn-primary" @click="openModal()">+ Add</button>
+        <button v-if="hasPermission('permission-create')" class="btn-primary" @click="openModal()">+ Add</button>
       </div>
     </div>
 
@@ -25,8 +25,8 @@
           <tr v-for="p in filteredPermissions" :key="p.id" class="hover:bg-gray-50">
             <td class="p-4 font-medium text-gray-800">{{ p.name }}</td>
             <td class="p-4 space-x-2">
-              <button class="btn-sm text-blue-600" @click="openModal(p)">Edit</button>
-              <button class="btn-sm text-red-600" @click="remove(p)">Delete</button>
+              <button v-if="hasPermission('permission-edit')" class="btn-sm text-blue-600" @click="openModal(p)">Edit</button>
+              <button v-if="hasPermission('permission-delete')" class="btn-sm text-red-600" @click="remove(p)">Delete</button>
             </td>
           </tr>
         </tbody>
@@ -55,6 +55,7 @@
 import axios from 'axios';
 
 export default {
+  props: ['user', 'userPermissions'],
   data() {
     return {
       permissions: [],
@@ -69,6 +70,9 @@ export default {
     this.fetchPermissions();
   },
   methods: {
+    hasPermission(permission) {
+      return this.userPermissions?.includes(permission);
+    },
     async fetchPermissions() {
       const { data } = await axios.get('/permissions');
       this.permissions = data;

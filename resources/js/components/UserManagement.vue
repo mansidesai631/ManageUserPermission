@@ -3,7 +3,7 @@
     <!-- Header -->
     <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
       <h2 class="text-2xl font-semibold text-indigo-600">👥 User Management</h2>
-      <button class="btn-primary" @click="openModal()">+ Add User</button>
+      <button v-if="hasPermission('user-create')" class="btn-primary" @click="openModal()">+ Add User</button>
     </div>
 
     <!-- Search -->
@@ -35,8 +35,8 @@
             <td class="p-4">{{ user.mobile }}</td>
             <td class="p-4">{{ USER_TYPE_LABELS[user.user_type] }}</td>
             <td class="p-4 space-x-2">
-              <button v-if="isOwner || isAdmin" class="btn-sm text-blue-600" @click="openModal(user)">Edit</button>
-              <button v-if="isOwner" class="btn-sm text-red-600" @click="remove(user)">Delete</button>
+              <button v-if="hasPermission('user-edit')" class="btn-sm text-blue-600" @click="openModal(user)">Edit</button>
+              <button v-if="hasPermission('user-delete')" class="btn-sm text-red-600" @click="remove(user)">Delete</button>
             </td>
           </tr>
         </tbody>
@@ -87,7 +87,7 @@
 <script>
 import axios from 'axios';
 export default {
-  props: ['user'],
+  props: ['user', 'userPermissions'],
   data() {
     return {
       users: { data: [], prev_page_url: null, next_page_url: null },
@@ -127,7 +127,7 @@ export default {
       this.users = data;
     },
     openModal(u = null) {
-      this.form = u ? { ...u, password: '' } : { id: null, name: '', email: '', mobile: '', user_type: 'Admin', password: '' };
+      this.form = u ? { ...u, password: '' } : { id: null, name: '', email: '', mobile: '', user_type: '2', password: '' };
       this.showModal = true;
     },
     async submitForm() {

@@ -35,7 +35,7 @@
       </header>
 
       <main class="flex-1 p-6 overflow-y-auto bg-white rounded-tl-2xl shadow-inner">
-        <component :is="currentView" :user="user" />
+        <component :is="currentView" :user="user" :userPermissions="user.permissions" />
       </main>
     </div>
   </div>
